@@ -52,7 +52,7 @@ arguments:
 --output : output file path
 
 e.g.
-python GenCast_run.py --model 0.25_2019 --eval_steps 5 --ens_num 10 --input /geodata2/S2S/DL/GC_input/data/ERA5_2019.nc --output /geodata2/S2S/DL/GC_output/GenCast_0.25_2019.nc
+python /home/hiskim1/gencast/GenCast_run.py --model 1.0_2019 --eval_steps 5 --ens_num 10 --input /geodata2/S2S/DL/GC_input/data/ERA5_2019.nc --output /geodata2/S2S/DL/GC_output/GenCast_0.25_2019.nc
 '''
 
 #-----------------------------
@@ -81,12 +81,12 @@ try:
         "1.0_mini_2019" : 'gencast_params_GenCast 1p0deg Mini _2019.npz'
     }
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 0: Error                   ")
-    print("An error occurred while parsing arguments")
-    print("Exception traceback:")
-    print(traceback.format_exc())  # 에러 발생 위치 전체 출력
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 0: Error                   ")
+    sys.error.write("An error occurred while parsing arguments")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())  # 에러 발생 위치 전체 출력
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -116,12 +116,12 @@ try:
     print("Model description:\n", ckpt.description, "\n")
     print("Model license:\n", ckpt.license, "\n")
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 1: Error                   ")
-    print("An error occurred while loading the model")
-    print("Exception traceback:")
-    print(traceback.format_exc())  # 에러 발생 위치 전체 출력
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 1: Error                   ")
+    sys.error.write("An error occurred while loading the model")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())  # 에러 발생 위치 전체 출력
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -136,12 +136,12 @@ try:
     with open(DATA_PATH, "rb") as f:
         input_data = xarray.load_dataset(f).compute()
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 2: Error                   ")
-    print("An error occurred while loading input data")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 2: Error                   ")
+    sys.error.write("An error occurred while loading input data")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -157,12 +157,12 @@ try:
         target_lead_times=slice("12h", "0h"),
         **dataclasses.asdict(task_config))
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 3: Error                   ")
-    print("An error occurred while extracting inputs and targets")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 3: Error                   ")
+    sys.error.write("An error occurred while extracting inputs and targets")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -183,12 +183,12 @@ try:
     with open(STATS_DIR + "min_by_level.nc", "rb") as f:
         min_by_level = xarray.load_dataset(f).compute()
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 4: Error                   ")
-    print("An error occurred while loading normalization data")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 4: Error                   ")
+    sys.error.write("An error occurred while loading normalization data")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -262,12 +262,12 @@ try:
     run_forward_pmap = xarray_jax.pmap(run_forward_jitted, dim="sample")
 
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 5: Error                   ")
-    print("An error occurred while building jitted functions")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 5: Error                   ")
+    sys.error.write("An error occurred while building jitted functions")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -287,12 +287,12 @@ try:
     )
     chunks = []
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 6: Error                   ")
-    print("An error occurred while setting up frames and data")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 6: Error                   ")
+    sys.error.write("An error occurred while setting up frames and data")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 # target_template 생성
@@ -304,12 +304,12 @@ try:
         d_t=12
     )
 except Exception as e:
-    print("====================================================")
-    print("               Phase 6 (target): Error              ")
-    print("An error occurred while generating target_template")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("               Phase 6 (target): Error              ")
+    sys.error.write("An error occurred while generating target_template")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 # forcings 생성
@@ -321,12 +321,12 @@ try:
         d_t=12
     )
 except Exception as e:
-    print("====================================================")
-    print("              Phase 6 (forcings): Error             ")
-    print("An error occurred while generating forcings")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("              Phase 6 (forcings): Error             ")
+    sys.error.write("An error occurred while generating forcings")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -342,12 +342,12 @@ try:
     print("Note that the number of ensemble members should be a multiple of the number of devices.")
     print(f"Number of local devices {len(jax.local_devices())}")
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 7: Error                   ")
-    print("An error occurred while checking ensemble members and devices")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 7: Error                   ")
+    sys.error.write("An error occurred while checking ensemble members and devices")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 try:
@@ -365,12 +365,12 @@ try:
         chunks.append(chunk)
     predictions = xarray.combine_by_coords(chunks)
 except Exception as e:
-    print("====================================================")
-    print("                   Phase 7: Error                   ")
-    print("An error occurred during model prediction")
-    print("Exception traceback:")
-    print(traceback.format_exc())
-    print("====================================================")
+    sys.error.write("====================================================")
+    sys.error.write("                   Phase 7: Error                   ")
+    sys.error.write("An error occurred during model prediction")
+    sys.error.write("Exception traceback:")
+    sys.error.write(traceback.format_exc())
+    sys.error.write("====================================================")
     sys.exit(1)
 
 
@@ -382,7 +382,7 @@ print("        Phase 8: Save the output       ")
 print("=======================================")
 print(np.datetime64('now'))
 
-predictions.to_zarr(parser.parse_args().output)
+predictions.squeeze().to_zarr(parser.parse_args().output)
 
 print("""
  ███████╗███╗   ██╗██████╗ 
