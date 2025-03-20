@@ -3,3 +3,7 @@ predictions.zarr/*
 *.pyc
 
 __pycache__/
+
+10yr_era5.zarr/
+
+*.zarr/
