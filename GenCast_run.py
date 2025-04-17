@@ -80,6 +80,7 @@ try:
         "1.0_2019" : 'gencast_params_GenCast 1p0deg _2019.npz',
         "1.0_mini_2019" : 'gencast_params_GenCast 1p0deg Mini _2019.npz'
     }
+
 except Exception as e:
     sys.error.write("====================================================")
     sys.error.write("                   Phase 0: Error                   ")
